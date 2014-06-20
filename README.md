@@ -57,7 +57,7 @@ Examples:
 $.ajax({
 	proxy: true, //flag to use proxy
 	type: "POST",
-	url: "http://localhost:5555/temp/create",
+	url: "cross-domain-url",
 	data: '{"some":"someone"}',
 	contentType: 'application/json',
 	success: function(res){
@@ -74,10 +74,10 @@ $.ajax({
 $.ajax({
 	proxy: true, //flag to use proxy
 	type: "GET",
-	url: "http://localhost:5555/user/list/539b15a7ae32e25c32939acb",
+	url: "cross-domain-url",
 	headers: {
-		"domainId" : "539b15a7ae32e25c32939acb",
-		"userId": "539b1834f9e114983644a469"
+		"header1" : "value 1",
+		"header1": "value 2"
 	},		
 	success: function(res){
 		alert('success' + res);
