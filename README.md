@@ -26,10 +26,13 @@ You can also specify the URL with the `X-Proxy-URL` header, which might be easie
 
 ``` JAVASCRIPT
 $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
-	if (options.url.match(/^https?:/)) {
-		options.headers['X-Proxy-URL'] = options.url;
-		options.url = '/proxy.php';
-	}
+    if (options.url.match(/^http?:/)) {
+    	if(!options.headers){
+    		options.headers  = {};
+    	}
+        options.headers['X-Proxy-URL'] = options.url;
+        options.url = '/Wordpress/proxy.php?_' + (new Date()).getTime();
+    }
 });
 ```
 
