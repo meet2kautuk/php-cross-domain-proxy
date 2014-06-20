@@ -91,10 +91,12 @@ if ( CSAJAX_FILTERS ) {
 		$check_url .= isset( $parsed['host'] ) ? $parsed['host'] : '';
 		$check_url .= isset( $parsed['port'] ) ? ':' . $parsed['port'] : '';
 		$check_url .= isset( $parsed['path'] ) ? $parsed['path'] : '';
+           if ( CSAJAX_FILTER_DOMAIN ) {
 		if ( !in_array( $check_url, $valid_requests ) ) {
 			csajax_debug_message( 'Invalid domain - ' . $request_url . ' does not included in valid requests' );
 			exit;
 		}
+            }
 	}
 }
 
