@@ -26,13 +26,15 @@ You can also specify the URL with the `X-Proxy-URL` header, which might be easie
 
 ``` JAVASCRIPT
 $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
-    if (options.url.match(/^http?:/)) {
-    	if(!options.headers){
-    		options.headers  = {};
-    	}
-        options.headers['X-Proxy-URL'] = options.url;
-        options.url = '/Wordpress/proxy.php?_' + (new Date()).getTime();
-    }
+	if(options.proxy){
+	    if (options.url.match(/^http?:/)) {
+	    	if(!options.headers){
+	    		options.headers  = {};
+	    	}
+	        options.headers['X-Proxy-URL'] = options.url;
+	        options.url = '/proxy.php?_' + (new Date()).getTime();
+	    }
+	}
 });
 ```
 
@@ -40,7 +42,7 @@ Configuration
 --------------
 
 For security reasons don't forget to define all the valid requests into top section of `proxy.php` file:
-
+( not mandeta )
 ``` JAVASCRIPT
 $valid_requests = array(
 	'http://www.domainA.com/',
@@ -48,4 +50,43 @@ $valid_requests = array(
 );
 ```
 
+Examples:
+
+``` JAVASCRIPT
+//POST
+$.ajax({
+	proxy: true, //flag to use proxy
+	type: "POST",
+	url: "http://localhost:5555/temp/create",
+	data: '{"some":"someone"}',
+	contentType: 'application/json',
+	success: function(res){
+		alert('success' + res);
+		console.log(res);
+	},
+	error: function(req){
+		alert('error' + req);
+		console.log(req);
+	}
+});
+
+//GET
+$.ajax({
+	proxy: true, //flag to use proxy
+	type: "GET",
+	url: "http://localhost:5555/user/list/539b15a7ae32e25c32939acb",
+	headers: {
+		"domainId" : "539b15a7ae32e25c32939acb",
+		"userId": "539b1834f9e114983644a469"
+	},		
+	success: function(res){
+		alert('success' + res);
+		console.log(res);
+	},
+	error: function(req){
+		alert('error' + req);
+		console.log(req);
+	}
+});
  
+```
