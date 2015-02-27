@@ -90,6 +90,6 @@ $.ajax({
 });
  
 ```
-Ntes:
+Notes:
 for php curl isseus on wamp on windows please refer:
 http://stackoverflow.com/questions/10939248/php-curl-not-working-wamp-on-windows-7-64-bit?rq=1
